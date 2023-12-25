@@ -1,8 +1,8 @@
 const Title = () => {
   return (
     <div>
-      Our Menu
-      <div></div>
+      <h2 className="title">Our Menu</h2>
+      <div className="title-underline"></div>
     </div>
   );
 };

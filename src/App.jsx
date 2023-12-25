@@ -1,28 +1,45 @@
+import { useState } from "react";
 import Title from "./Title";
 import menu from "./data";
 const App = () => {
-  console.log(menu[0]);
+  const [categoryListe, setCategoryListe] = useState(menu);
+
+  const filterMenu = (cat) => {
+    const newMenu = menu.filter((m) => m.category === cat);
+    setCategoryListe(newMenu);
+  };
 
   return (
-    <section>
+    <section className="menu">
       <Title />
       <main>
-        <div>
-          <button>All</button>
-          <button>Breakfast</button>
-          <button>Lunch</button>
-          <button>Shakes</button>
+        <div className="btn-container">
+          <button className="btn" onClick={() => setCategoryListe(menu)}>
+            All
+          </button>
+          <button className="btn" onClick={() => filterMenu("breakfast")}>
+            Breakfast
+          </button>
+          <button className="btn" onClick={() => filterMenu("lunch")}>
+            Lunch
+          </button>
+          <button className="btn" onClick={() => filterMenu("shakes")}>
+            Shakes
+          </button>
         </div>
-        <ul>
-          {menu.map((m) => {
+        <ul className="section-center">
+          {categoryListe.map((m) => {
             const { id, img, price, title, desc, category } = m;
             return (
-              <li key={id}>
-                <img src={img} alt={title} />
-                <div>
-                  <h5>{title}</h5> <span>{price}</span>{" "}
+              <li key={id} className="menu-item">
+                <img className="img" src={img} alt={title} />
+                <div className="item-info">
+                  <header>
+                    <h5>{title}</h5>{" "}
+                    <span className="item-price">$ {price}</span>{" "}
+                  </header>
+                  <p className="item-text">{desc}</p>
                 </div>
-                <p>{desc}</p>
               </li>
             );
           })}
